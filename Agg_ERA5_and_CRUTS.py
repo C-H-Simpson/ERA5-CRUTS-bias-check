@@ -97,6 +97,7 @@ cruts_grid_tmp
 
 # select matching data periods
 cruts_tmp_sel = cruts_grid_tmp.sel(time=slice(min_time, max_time))
+cruts_tmx_sel = cruts_grid_tmx.sel(time=slice(min_time, max_time))
 era5_t2m_sel = era5_t2m.sel(time=slice(min_time, max_time))
 
 # rename lat/lon in era5
@@ -123,6 +124,9 @@ era5_t2m_sel
 # get the monthly averages
 cruts_tmp_months = cruts_tmp_sel.groupby("time.month").mean()
 
+# get the monthly averages
+cruts_tmx_months = cruts_tmx_sel.groupby("time.month").mean()
+
 era5_t2m_months = era5_t2m_sel.groupby("time.month").mean()
 
 # +
@@ -132,8 +136,12 @@ era5_t2m_months = era5_t2m_sel.groupby("time.month").mean()
 # +
 # because the previous computation steps are lazy, this is the step that will do the computation, possibly making it slow.
 # difference.to_netcdf(Path("data") / "difference.nc")
+
+# +
+# era5_t2m_months.to_netcdf("data/era5_t2m_mavg.nc")
+
+# +
+# cruts_tmp_months.to_netcdf("data/cruts_tmp_mavg.nc")
 # -
 
-era5_t2m_months.to_netcdf("data/era5_mavg.nc")
-
-cruts_tmp_months.to_netcdf("data/cruts_mavg.nc")
+cruts_tmx_months.to_netcdf("data/cruts_tmx_mavg.nc")
