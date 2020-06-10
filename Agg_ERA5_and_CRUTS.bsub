@@ -1,0 +1,26 @@
+#!/bin/bash 
+#BSUB -q short-serial
+#BSUB -J ERA_CRUTS
+#BSUB -o %J-%I.out 
+#BSUB -e %J-%I.err 
+#BSUB -W 01:00
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/users/champs/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/users/champs/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/users/champs/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/users/champs/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+conda activate bias_explore
+pwd
+
+python Agg_ERA5_and_CRUTS.py 

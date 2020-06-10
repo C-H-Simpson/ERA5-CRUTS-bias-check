@@ -1,0 +1,12 @@
+name: bias_explore
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - jupyter
+  - xarray
+  - jupytext
+  - scipy
+  - numpy
+  - netcdf4
+  - cartopy
